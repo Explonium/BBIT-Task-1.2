@@ -46,6 +46,20 @@ namespace BBIT_Task_1._2.Controllers
             return building;
         }
 
+        [Route("{id}/apartments")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Apartment>>> GetApartmentsByBuilding(Guid id)
+        {
+            var building = await _context.Buildings.FindAsync(id);
+
+            if (building == null)
+            {
+                return NotFound();
+            }
+
+            return await _context.Apartments.Where(apartment => apartment.BuildingId == id).ToListAsync();
+        }
+
         // PUT: api/Buildings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

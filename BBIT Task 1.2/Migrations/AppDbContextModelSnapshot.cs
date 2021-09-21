@@ -19,33 +19,7 @@ namespace BBIT_Task_1._2.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BBIT_Task_1._2.Entities.Building", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalIndex")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Buildings");
-                });
-
-            modelBuilder.Entity("BBIT_Task_1._2.Entities.Flat", b =>
+            modelBuilder.Entity("BBIT_Task_1._2.Entities.Apartment", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
@@ -76,7 +50,33 @@ namespace BBIT_Task_1._2.Migrations
 
                     b.HasIndex("BuildingId");
 
-                    b.ToTable("Flats");
+                    b.ToTable("Apartments");
+                });
+
+            modelBuilder.Entity("BBIT_Task_1._2.Entities.Building", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalIndex")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Buildings");
                 });
 
             modelBuilder.Entity("BBIT_Task_1._2.Entities.Tenant", b =>
@@ -84,14 +84,14 @@ namespace BBIT_Task_1._2.Migrations
                     b.Property<string>("PersonalCode")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<Guid>("ApartmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("FlatId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -101,15 +101,15 @@ namespace BBIT_Task_1._2.Migrations
 
                     b.HasKey("PersonalCode");
 
-                    b.HasIndex("FlatId");
+                    b.HasIndex("ApartmentId");
 
                     b.ToTable("Tenants");
                 });
 
-            modelBuilder.Entity("BBIT_Task_1._2.Entities.Flat", b =>
+            modelBuilder.Entity("BBIT_Task_1._2.Entities.Apartment", b =>
                 {
                     b.HasOne("BBIT_Task_1._2.Entities.Building", "Building")
-                        .WithMany("Flats")
+                        .WithMany("Apartments")
                         .HasForeignKey("BuildingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -119,23 +119,23 @@ namespace BBIT_Task_1._2.Migrations
 
             modelBuilder.Entity("BBIT_Task_1._2.Entities.Tenant", b =>
                 {
-                    b.HasOne("BBIT_Task_1._2.Entities.Flat", "Flat")
+                    b.HasOne("BBIT_Task_1._2.Entities.Apartment", "Apartment")
                         .WithMany("Tenants")
-                        .HasForeignKey("FlatId")
+                        .HasForeignKey("ApartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Flat");
+                    b.Navigation("Apartment");
+                });
+
+            modelBuilder.Entity("BBIT_Task_1._2.Entities.Apartment", b =>
+                {
+                    b.Navigation("Tenants");
                 });
 
             modelBuilder.Entity("BBIT_Task_1._2.Entities.Building", b =>
                 {
-                    b.Navigation("Flats");
-                });
-
-            modelBuilder.Entity("BBIT_Task_1._2.Entities.Flat", b =>
-                {
-                    b.Navigation("Tenants");
+                    b.Navigation("Apartments");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BBIT_Task_1._2.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,7 +24,7 @@ namespace BBIT_Task_1._2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Flats",
+                name: "Apartments",
                 columns: table => new
                 {
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -38,9 +38,9 @@ namespace BBIT_Task_1._2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Flats", x => x.Guid);
+                    table.PrimaryKey("PK_Apartments", x => x.Guid);
                     table.ForeignKey(
-                        name: "FK_Flats_Buildings_BuildingId",
+                        name: "FK_Apartments_Buildings_BuildingId",
                         column: x => x.BuildingId,
                         principalTable: "Buildings",
                         principalColumn: "Id",
@@ -56,28 +56,28 @@ namespace BBIT_Task_1._2.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FlatId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ApartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tenants", x => x.PersonalCode);
                     table.ForeignKey(
-                        name: "FK_Tenants_Flats_FlatId",
-                        column: x => x.FlatId,
-                        principalTable: "Flats",
+                        name: "FK_Tenants_Apartments_ApartmentId",
+                        column: x => x.ApartmentId,
+                        principalTable: "Apartments",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Flats_BuildingId",
-                table: "Flats",
+                name: "IX_Apartments_BuildingId",
+                table: "Apartments",
                 column: "BuildingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tenants_FlatId",
+                name: "IX_Tenants_ApartmentId",
                 table: "Tenants",
-                column: "FlatId");
+                column: "ApartmentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -86,7 +86,7 @@ namespace BBIT_Task_1._2.Migrations
                 name: "Tenants");
 
             migrationBuilder.DropTable(
-                name: "Flats");
+                name: "Apartments");
 
             migrationBuilder.DropTable(
                 name: "Buildings");

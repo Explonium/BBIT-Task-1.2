@@ -17,11 +17,11 @@ namespace BBIT_Task_1._2.Entities
         public DateTime DateOfBirth { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public Guid FlatId { get; set; }
+        public Guid ApartmentId { get; set; }
 
         // Relations
 
-        [ForeignKey("FlatId")]
-        public virtual Flat Flat { get; set; }
+        [ForeignKey("ApartmentId")]
+        public virtual Apartment Apartment { get; set; }
     }
 }

@@ -22,6 +22,6 @@ namespace BBIT_Task_1._2.Entities
         // Relations
 
         [InverseProperty("Building")]
-        public virtual ICollection<Flat> Flats { get; set; }
+        public virtual ICollection<Apartment> Apartments { get; set; }
     }
 }

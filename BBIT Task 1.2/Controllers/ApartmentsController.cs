@@ -12,27 +12,27 @@ namespace BBIT_Task_1._2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FlatsController : ControllerBase
+    public class ApartmentsController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public FlatsController(AppDbContext context)
+        public ApartmentsController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Flats
+        // GET: api/Apartments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Flat>>> GetFlats()
+        public async Task<ActionResult<IEnumerable<Apartment>>> GetApartments()
         {
-            return await _context.Flats.ToListAsync();
+            return await _context.Apartments.ToListAsync();
         }
 
-        // GET: api/Flats/5
+        // GET: api/Apartments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Flat>> GetFlat(Guid id)
+        public async Task<ActionResult<Apartment>> GetApartment(Guid id)
         {
-            var flat = await _context.Flats.FindAsync(id);
+            var flat = await _context.Apartments.FindAsync(id);
 
             if (flat == null)
             {
@@ -42,10 +42,24 @@ namespace BBIT_Task_1._2.Controllers
             return flat;
         }
 
-        // PUT: api/Flats/5
+        [Route("{id}/tenants")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Tenant>>> GetTenantsByApartment(Guid id)
+        {
+            var flat = await _context.Apartments.FindAsync(id);
+
+            if (flat == null)
+            {
+                return NotFound();
+            }
+
+            return await _context.Tenants.Where(tenant => tenant.ApartmentId == id).ToListAsync();
+        }
+
+        // PUT: api/Apartments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFlat(Guid id, Flat flat)
+        public async Task<IActionResult> PutApartment(Guid id, Apartment flat)
         {
             if (id != flat.Guid)
             {
@@ -60,7 +74,7 @@ namespace BBIT_Task_1._2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FlatExists(id))
+                if (!ApartmentExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +87,36 @@ namespace BBIT_Task_1._2.Controllers
             return NoContent();
         }
 
-        // POST: api/Flats
+        // POST: api/Apartments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Flat>> PostFlat(Flat flat)
+        public async Task<ActionResult<Apartment>> PostApartment(Apartment flat)
         {
-            _context.Flats.Add(flat);
+            _context.Apartments.Add(flat);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetFlat", new { id = flat.Guid }, flat);
         }
 
-        // DELETE: api/Flats/5
+        // DELETE: api/Apartments/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFlat(Guid id)
+        public async Task<IActionResult> DeleteApartment(Guid id)
         {
-            var flat = await _context.Flats.FindAsync(id);
+            var flat = await _context.Apartments.FindAsync(id);
             if (flat == null)
             {
                 return NotFound();
             }
 
-            _context.Flats.Remove(flat);
+            _context.Apartments.Remove(flat);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool FlatExists(Guid id)
+        private bool ApartmentExists(Guid id)
         {
-            return _context.Flats.Any(e => e.Guid == id);
+            return _context.Apartments.Any(e => e.Guid == id);
         }
     }
 }

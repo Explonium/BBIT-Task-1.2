@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BBIT_Task_1._2.Entities
 {
-    public class Flat
+    public class Apartment
     {
         // Fields
         [Key]
@@ -25,7 +25,7 @@ namespace BBIT_Task_1._2.Entities
         [ForeignKey("BuildingId")]
         public virtual Building Building { get; set; }
 
-        [InverseProperty("Flat")]
+        [InverseProperty("Apartment")]
         public virtual ICollection<Tenant> Tenants { get; set; }
     }
 }
