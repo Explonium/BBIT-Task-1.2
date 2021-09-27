@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BBIT_Task_1._2.Data;
 using BBIT_Task_1._2.Entities;
+using AutoMapper;
 
 namespace BBIT_Task_1._2.Controllers
 {
@@ -15,10 +16,12 @@ namespace BBIT_Task_1._2.Controllers
     public class TenantsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public TenantsController(AppDbContext context)
+        public TenantsController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Tenants
@@ -76,8 +79,10 @@ namespace BBIT_Task_1._2.Controllers
         // POST: api/Tenants
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Tenant>> PostTenant(Tenant tenant)
+        public async Task<ActionResult<Tenant>> PostTenant(Tenant model)
         {
+            var tenant = _mapper.Map<Tenant>(model);
+
             _context.Tenants.Add(tenant);
             try
             {
@@ -95,7 +100,7 @@ namespace BBIT_Task_1._2.Controllers
                 }
             }
 
-            return CreatedAtAction("GetTenant", new { id = tenant.PersonalCode }, tenant);
+            return CreatedAtAction("GetTenant", new { id = model.PersonalCode }, model);
         }
 
         // DELETE: api/Tenants/5

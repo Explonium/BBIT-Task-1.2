@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BBIT_Task_1._2.Data;
 using BBIT_Task_1._2.Entities;
+using AutoMapper;
+using BBIT_Task_1._2.Models;
 
 namespace BBIT_Task_1._2.Controllers
 {
@@ -15,10 +17,12 @@ namespace BBIT_Task_1._2.Controllers
     public class ApartmentsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ApartmentsController(AppDbContext context)
+        public ApartmentsController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Apartments
@@ -90,12 +94,15 @@ namespace BBIT_Task_1._2.Controllers
         // POST: api/Apartments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Apartment>> PostApartment(Apartment flat)
+        public async Task<ActionResult<Apartment>> PostApartment(ApartmentPostModel model)
         {
-            _context.Apartments.Add(flat);
+            var apartment = _mapper.Map<Apartment>(model);
+            apartment.Guid = new Guid();
+
+            _context.Apartments.Add(apartment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFlat", new { id = flat.Guid }, flat);
+            return CreatedAtAction("GetFlat", new { id = apartment.Guid }, apartment);
         }
 
         // DELETE: api/Apartments/5
