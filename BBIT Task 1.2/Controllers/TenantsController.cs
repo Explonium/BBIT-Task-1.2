@@ -100,7 +100,7 @@ namespace BBIT_Task_1._2.Controllers
                 }
             }
 
-            return CreatedAtAction("GetTenant", new { id = model.PersonalCode }, model);
+            return CreatedAtAction("PostTenant", new { id = model.PersonalCode }, model);
         }
 
         // DELETE: api/Tenants/5

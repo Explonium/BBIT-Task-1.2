@@ -50,14 +50,8 @@ namespace BBIT_Task_1._2.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Apartment>>> GetApartmentsByBuilding(Guid id)
         {
-            var building = await _context.Buildings.FindAsync(id);
-
-            if (building == null)
-            {
-                return NotFound();
-            }
-
-            return await _context.Apartments.Where(apartment => apartment.BuildingId == id).ToListAsync();
+            var list = await _context.Apartments.Where(apartment => apartment.BuildingId == id).ToListAsync();
+            return list;
         }
 
         // PUT: api/Buildings/5
@@ -97,7 +91,7 @@ namespace BBIT_Task_1._2.Controllers
         public async Task<ActionResult<Building>> PostBuilding(BuildingPostModel model)
         {
             var building = _mapper.Map<Building>(model);
-            building.Id = new Guid();
+            building.Id = Guid.NewGuid();
 
             _context.Buildings.Add(building);
             await _context.SaveChangesAsync();

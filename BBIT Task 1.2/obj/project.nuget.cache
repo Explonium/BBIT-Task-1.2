@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7Tb7YrWAKbUR98+DBSzlvwHU132/u3JfXqzf7ooNHeEEJdRU4ONSmbIpIImpQhgENBLUIArkbNU32+GTw0nRaw==",
+  "dgSpecHash": "glxUvaIdoYA9SGFu6S/ILamlWkwDZfL3aSwve557qi5ODHbaba/FIYRLPrztBTR5xzRRO2MB85O9SO8oCAPOgg==",
   "success": true,
   "projectFilePath": "D:\\VS Projects\\BBIT Task 1.2\\BBIT Task 1.2\\BBIT Task 1.2.csproj",
   "expectedPackageFiles": [
@@ -57,7 +57,7 @@
     "C:\\Users\\Алексей\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\5.0.2\\microsoft.visualstudio.web.codegenerators.mvc.5.0.2.nupkg.sha512",
     "C:\\Users\\Алексей\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Алексей\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "C:\\Users\\Алексей\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Алексей\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Алексей\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Алексей\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\Алексей\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",

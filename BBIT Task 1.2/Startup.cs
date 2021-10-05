@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace BBIT_Task_1._2
 {
@@ -50,6 +51,7 @@ namespace BBIT_Task_1._2
             app.UseCors(options =>
             {
                 options.WithOrigins("http://localhost:4200")
+                .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader();
             });
